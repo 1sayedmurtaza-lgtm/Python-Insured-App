@@ -1,4 +1,7 @@
+from secrets import choice
+
 from evidence import Evidence
+from utils import get_clean_input
 #The App / UI (main.py)
 #This is the only file that communicates with the user. It uses input() to get data and print() to show results. It creates an instance of the Evidence class to manage the insured records. The main function contains a loop that displays a menu, processes user choices, and interacts with the Evidence class accordingly.
 
@@ -17,18 +20,15 @@ def main():
         
         choice = input("\nChoice: ")
 
+        # Inside your main loop for Choice 1:
         if choice == "1":
-            # Basic validation: ensure name is not empty
-            name = input("Enter name: ").strip()
-            while not name:
-                name = input("Name cannot be empty. Enter name: ").strip()
-                
-            surname = input("Enter surname: ")
-            phone = input("Enter phone number: ")
-            age = input("Enter age: ")
-            
-            database.add_insured(name, surname, age, phone)
-            input("\nData saved. Press any key to continue...")
+           name = get_clean_input("Enter name: ")
+           surname = get_clean_input("Enter surname: ")
+           phone = get_clean_input("Enter phone number: ")
+           age = get_clean_input("Enter age: ")
+    
+           database.add_insured(name, surname, age, phone)
+           print("\nData saved successfully!")
 
         elif choice == "2":
             records = database.get_all()
